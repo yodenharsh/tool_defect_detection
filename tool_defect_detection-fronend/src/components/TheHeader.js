@@ -1,9 +1,10 @@
 const Header = () => {
   return (
     <div>
-      <header>
-        <h1>lol</h1>
-      </header>
+      {/* <header style = {{marginTop: '20px'}}> */}
+        <br></br>
+        <h3><center>Tool Damage Detection Service</center></h3>
+      {/* </header> */}
     </div>
   );
 };

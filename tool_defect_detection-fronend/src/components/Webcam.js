@@ -1,10 +1,14 @@
 import Webcam from "react-webcam";
 import React, { useState } from "react";
 import url from "../url";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 const videoConstraints = {
-  width: 1280,
-  height: 720,
+  width: 1600,
+  height: 900,
   facingMode: "user",
 };
 
@@ -46,19 +50,49 @@ const WebcamCapture = () => {
     }
     return new Blob([u8arr], { type: mime });
   };
+  // return (
+  //   <>
+  //     <Webcam
+  //       audio={false}
+  //       height={504}
+  //       ref={webcamRef}
+  //       screenshotFormat="image/jpeg"
+  //       width={896}
+  //       videoConstraints={videoConstraints}
+  //     />
+  //     {/* {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
+  //     {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>} */}
+
+  //     <div style={{ display: 'block' }}>
+  //     {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
+  //     {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>}
+  //     </div>
+  //   </>
+  // );
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
       <Webcam
         audio={false}
-        height={504}
+        height={400}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={896}
+        width={800}
         videoConstraints={videoConstraints}
+        style={{ marginBottom: '4rem' }}
       />
-      {!doCapture && <button onClick={startCapturing}>Start Service</button>}
-      {doCapture && <button onClick={stopCapturing}>Stop service</button>}
-    </>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
+        {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>}
+      </div>
+    </div>
   );
 };
 
