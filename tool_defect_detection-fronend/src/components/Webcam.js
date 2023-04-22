@@ -50,25 +50,6 @@ const WebcamCapture = () => {
     }
     return new Blob([u8arr], { type: mime });
   };
-  // return (
-  //   <>
-  //     <Webcam
-  //       audio={false}
-  //       height={504}
-  //       ref={webcamRef}
-  //       screenshotFormat="image/jpeg"
-  //       width={896}
-  //       videoConstraints={videoConstraints}
-  //     />
-  //     {/* {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
-  //     {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>} */}
-
-  //     <div style={{ display: 'block' }}>
-  //     {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
-  //     {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>}
-  //     </div>
-  //   </>
-  // );
   return (
     <div
       style={{
@@ -81,14 +62,14 @@ const WebcamCapture = () => {
     >
       <Webcam
         audio={false}
-        height={400}
+        height={550}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={800}
+
         videoConstraints={videoConstraints}
-        style={{ marginBottom: '4rem' }}
+        style={{ marginBottom: '2rem' }}
       />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
         {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
         {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>}
       </div>

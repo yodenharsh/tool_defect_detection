@@ -1,9 +1,9 @@
 const Header = () => {
   return (
-    <div>
-      {/* <header style = {{marginTop: '20px'}}> */}
+    <div style = {{marginTop: '20px', marginBottom: "-100px"}}>
+      {/* <header > */}
         <br></br>
-        <h3><center>Tool Damage Detection Service</center></h3>
+        <h3 style = {{ fontFamily: 'open sans', fontWeight: "bolder"}}><center>Tool Damage Detection Service</center></h3>
       {/* </header> */}
     </div>
   );
