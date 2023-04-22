@@ -5,7 +5,7 @@ const Footer = () => {
         display: "flex", 
         justifyContent: "center", 
         alignContent: "center", 
-        marginTop: "-100px",
+        marginTop: "-150px",
         fontSize: "22px"
         }}>This is a footer</footer>
 

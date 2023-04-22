@@ -66,9 +66,9 @@ const WebcamCapture = ({ setResponseData }) => {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         videoConstraints={videoConstraints}
-        style={{ marginBottom: "2rem" }}
+        style={{ marginBottom: "2rem", marginTop: "-5rem" }}
       />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
         {!doCapture && (
           <Button variant="success" onClick={startCapturing}>
             Start Service
