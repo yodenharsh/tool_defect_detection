@@ -1,10 +1,8 @@
 import Webcam from "react-webcam";
 import React, { useState } from "react";
 import url from "../url";
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const videoConstraints = {
   width: 1600,
@@ -14,7 +12,7 @@ const videoConstraints = {
 
 var captureLoop = null;
 
-const WebcamCapture = () => {
+const WebcamCapture = ({ setResponseData }) => {
   const webcamRef = React.useRef(null);
   const [doCapture, setDoCapture] = useState(false);
   const startCapturing = () => {
@@ -37,7 +35,9 @@ const WebcamCapture = () => {
       method: "POST",
       body: theForm,
     });
-    console.log(await response.json());
+    const responseData = await response.json();
+    setResponseData(responseData);
+    console.log(responseData);
   };
   const dataURLtoBlob = (dataurl) => {
     var arr = dataurl.split(","),
@@ -53,11 +53,11 @@ const WebcamCapture = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
       }}
     >
       <Webcam
@@ -65,13 +65,20 @@ const WebcamCapture = () => {
         height={550}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-
         videoConstraints={videoConstraints}
-        style={{ marginBottom: '2rem' }}
+        style={{ marginBottom: "2rem" }}
       />
-      <div style={{ display: 'flex', justifyContent: 'center'}}>
-        {!doCapture && <Button variant="success" onClick={startCapturing}>Start Service</Button>}
-        {doCapture && <Button variant="danger" onClick={stopCapturing}>Stop service</Button>}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {!doCapture && (
+          <Button variant="success" onClick={startCapturing}>
+            Start Service
+          </Button>
+        )}
+        {doCapture && (
+          <Button variant="danger" onClick={stopCapturing}>
+            Stop service
+          </Button>
+        )}
       </div>
     </div>
   );

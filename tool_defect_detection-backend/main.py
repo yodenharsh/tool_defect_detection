@@ -3,7 +3,7 @@ from flask_cors import cross_origin
 from PIL import Image
 import os
 from werkzeug.utils import secure_filename
-
+import image_processing
 
 app = Flask(__name__)
 
@@ -26,10 +26,15 @@ def process_image():
     if ext not in ['.jpg', '.jpeg', '.png', '.gif']:
         ext = '.jpeg'
     filename = f"image{file_num}{ext}"
-    img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    img.save(filepath)
     file_num += 1
-
-    return jsonify({'msg': 'success', 'size': [img.entropy(), img.height]})
+    is_accepted = image_processing.driver(filepath)
+    return jsonify({
+        'msg': 'success',
+        'size': [img.entropy(), img.height],
+        'accepted': is_accepted,
+        'imageId': file_num - 1})
 
 
 if __name__ == "__main__":
