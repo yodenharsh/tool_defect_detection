@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <div style = {{marginTop: '20px', marginBottom: "-100px"}}>
+    <div style = {{marginTop: '20px', marginBottom: "-50px"}}>
       {/* <header > */}
         <br></br>
         <h3 style = {{ fontFamily: 'open sans', fontWeight: "bolder"}}><center>Tool Damage Detection Service</center></h3>

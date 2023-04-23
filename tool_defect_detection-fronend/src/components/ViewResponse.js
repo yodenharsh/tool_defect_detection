@@ -6,42 +6,30 @@ const ViewResponse = ({ responseData }) => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "-50px", marginBottom: "30px", width: "100%", display: "flex", justifyContent: "center"}}>
       {!!responseData && (
-        // <table>
-        //   <thead>
-        //     <tr>
-        //       <th>Image ID</th>
-        //       <th>Status</th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     <tr>
-        //       <td>{responseData.imageId}</td>
-        //       <td>{JSON.stringify(responseData.accepted)}</td>
-        //     </tr>
-        //   </tbody>
-        // </table>
-        <Table bordered striped hover>
-          <thead>
-            <tr>
-              <th>Session ID</th>
-              <th>Image ID</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{responseData.sessionId}</td>
-              <td>{responseData.imageId}</td>
-              <td>{accepted(JSON.stringify(responseData.accepted))}</td>
-            </tr>
-          </tbody>
-        </Table>
+        <div style={{ width: "500px", display: "flex", justifyContent: "center" }}>
+          <Table bordered striped hover style={{ alignItems: "center"}}>
+            <thead>
+              <tr>
+                <th>Session ID</th>
+                <th>Image ID</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{responseData.sessionId}</td>
+                <td>{responseData.imageId}</td>
+                <td>{accepted(JSON.stringify(responseData.accepted))}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
       )}
     </div>
   );
-  // };
+  
 };
 
 export default ViewResponse;
