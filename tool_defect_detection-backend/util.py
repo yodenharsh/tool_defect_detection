@@ -1,9 +1,7 @@
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image
-import random
 import uuid
-import random
 
 
 def save_img(file, upload_folder, file_num):
