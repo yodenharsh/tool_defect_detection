@@ -182,7 +182,7 @@ def match(img1, img2='frame_0.jpg'):
         img1, kp1, img2, kp2, matches[:20], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
     # check if images match
-    if len(matches) > 100:
+    if len(matches) > 135:
         return "accepted"
     else:
         return "rejected"
