@@ -1,8 +1,8 @@
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 
 const ViewResponse = ({ responseData }) => {
   const accepted = (isAccepted) => {
-    return isAccepted == true ? "Accepted" : "Not Accepted";
+    return isAccepted === true ? "Accepted" : "Not Accepted";
   };
 
   return (
@@ -41,7 +41,7 @@ const ViewResponse = ({ responseData }) => {
       )}
     </div>
   );
-// };
-}
+  // };
+};
 
 export default ViewResponse;
