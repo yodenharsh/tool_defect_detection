@@ -25,12 +25,14 @@ const ViewResponse = ({ responseData }) => {
         <Table bordered striped hover>
           <thead>
             <tr>
+              <th>Session ID</th>
               <th>Image ID</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>{responseData.sessionId}</td>
               <td>{responseData.imageId}</td>
               <td>{accepted(JSON.stringify(responseData.accepted))}</td>
             </tr>

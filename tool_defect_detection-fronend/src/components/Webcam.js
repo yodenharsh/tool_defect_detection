@@ -15,18 +15,37 @@ var captureLoop = null;
 const WebcamCapture = ({ setResponseData }) => {
   const webcamRef = React.useRef(null);
   const [doCapture, setDoCapture] = useState(false);
+  const [firstConnect, setFirstConnect] = useState([true, null]);
+
   const startCapturing = () => {
-    setDoCapture(true);
-    captureLoop = setInterval(() => {
-      capture();
-    }, 1000);
+    if (firstConnect[0]) {
+      getSessionId().then((response) => {
+        setFirstConnect([false, response.sessionId]);
+        console.log(response.sessionId);
+        setDoCapture(true);
+        captureLoop = setInterval(() => {
+          capture(response.sessionId);
+        }, 5000);
+      });
+    } else {
+      setDoCapture(true);
+      captureLoop = setInterval(() => {
+        capture(firstConnect[1]);
+      }, 5000);
+    }
+  };
+
+  const getSessionId = async () => {
+    const response = await fetch(url + "/connect");
+    const responseJson = await response.json();
+    return await responseJson;
   };
 
   const stopCapturing = () => {
     setDoCapture(false);
     clearInterval(captureLoop);
   };
-  const capture = async () => {
+  const capture = async (sessionId) => {
     const imageSrc = webcamRef.current.getScreenshot();
     let theForm = new FormData();
     const blob = dataURLtoBlob(imageSrc);
@@ -36,6 +55,7 @@ const WebcamCapture = ({ setResponseData }) => {
       body: theForm,
     });
     const responseData = await response.json();
+    responseData["sessionId"] = sessionId;
     setResponseData(responseData);
     console.log(responseData);
   };
@@ -68,7 +88,9 @@ const WebcamCapture = ({ setResponseData }) => {
         videoConstraints={videoConstraints}
         style={{ marginBottom: "2rem", marginTop: "-5rem" }}
       />
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
+      >
         {!doCapture && (
           <Button variant="success" onClick={startCapturing}>
             Start Service

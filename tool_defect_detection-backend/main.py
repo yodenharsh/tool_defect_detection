@@ -1,13 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import cross_origin
-from PIL import Image
-import os
-from werkzeug.utils import secure_filename
 import image_processing
+import util
 
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = 'images/input_images'
+util.create_if_does_not_exist(app.config['UPLOAD_FOLDER'])
 
 file_num = 1
 
@@ -17,24 +16,24 @@ file_num = 1
 def process_image():
     global file_num
     file = request.files['image']
-    # Read the image via file.stream
-    img = Image.open(file.stream)
-
-    # Save the image to a file
-    filename = secure_filename(file.filename)
-    ext = os.path.splitext(filename)[1]
-    if ext not in ['.jpg', '.jpeg', '.png', '.gif']:
-        ext = '.jpeg'
-    filename = f"image{file_num}{ext}"
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    img.save(filepath)
+    _, filepath = util.save_img(file, app.config['UPLOAD_FOLDER'], file_num)
     file_num += 1
     is_accepted = image_processing.driver(filepath)
     return jsonify({
         'msg': 'success',
-        'size': [img.entropy(), img.height],
         'accepted': is_accepted,
         'imageId': file_num - 1})
+
+
+@app.route("/connect", methods=["GET"])
+@cross_origin()
+def get_uuid():
+    generated_id = util.generate_unique_id()
+    app.config['UPLOAD_FOLDER'] = 'images/input_images/' + generated_id
+    util.create_if_does_not_exist(app.config['UPLOAD_FOLDER'])
+    return jsonify({
+        'sessionId': generated_id
+    })
 
 
 if __name__ == "__main__":
